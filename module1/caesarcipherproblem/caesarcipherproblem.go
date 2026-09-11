@@ -10,11 +10,19 @@ import (
 )
 
 func caesarCipher(s string, k int32) string {
-	for i := 0; i < len(s); i++ {
-		if s[i] >= 'A' && s[i] <= 'Z' {
-			s[i] = s((s[i] % 65))
+	k = k % 26
+
+	result := []byte(s)
+
+	for i := 0; i < len(result); i++ {
+		if result[i] >= 'A' && result[i] <= 'Z' {
+			result[i] = 'A' + (result[i]-'A'+byte(k))%26
+		} else if result[i] >= 'a' && result[i] <= 'z' {
+			result[i] = 'a' + (result[i]-'a'+byte(k))%26
 		}
 	}
+
+	return string(result)
 }
 
 func main() {
@@ -30,6 +38,8 @@ func main() {
 	nTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
 	checkError(err)
 	n := int32(nTemp)
+
+	_ = n
 
 	s := readLine(reader)
 
