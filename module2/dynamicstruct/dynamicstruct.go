@@ -72,6 +72,7 @@ func main() {
 
 	// fmt.Println(structValue)
 
+	//for creating dynamic struct fields based on the JSON data, you can use the following approach:
 	// for field, value := range data {
 	// 	fieldName := strings.Map(func(r rune) rune {
 	// 		if unicode.IsLetter(r) || unicode.IsDigit(r) {
