@@ -12,17 +12,17 @@ var (
 	mu   sync.Mutex
 )
 
-func shortenHandler(w http.ResponseWriter, r *http.Request) {
+func shortenHandler(response http.ResponseWriter, request *http.Request) {
 
-	if r.Method != http.MethodPost {
-		http.Error(w, "Only POST allowed", http.StatusMethodNotAllowed)
+	if request.Method != http.MethodPost {
+		http.Error(response, "Only POST allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	longURL := r.URL.Query().Get("url")
+	longURL := request.URL.Query().Get("url")
 
 	if longURL == "" {
-		http.Error(w, "URL is required", http.StatusBadRequest)
+		http.Error(response, "URL is required", http.StatusBadRequest)
 		return
 	}
 
@@ -35,7 +35,7 @@ func shortenHandler(w http.ResponseWriter, r *http.Request) {
 
 	shortURL := "http://localhost:8080/" + shortCode
 
-	fmt.Fprintln(w, shortURL)
+	fmt.Fprintln(response, shortURL)
 }
 
 func redirectHandler(w http.ResponseWriter, r *http.Request) {
